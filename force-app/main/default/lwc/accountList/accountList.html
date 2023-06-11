@@ -1,0 +1,15 @@
+<template>
+    <div class="slds-m-around_medium">
+        <lightning-card title="Account List">
+            <div slot="actions">
+                <lightning-button label="New Account" variant="brand" onclick={handleNewAccount}></lightning-button>
+            </div>
+            <lightning-datatable
+                data={accounts}
+                columns={columns}
+                key-field="Id"
+                onrowaction={handleRowAction}>
+            </lightning-datatable>
+        </lightning-card>
+    </div>
+</template>

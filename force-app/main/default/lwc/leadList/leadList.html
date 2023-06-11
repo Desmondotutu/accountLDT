@@ -1,0 +1,57 @@
+<template>
+    <lightning-card title="Lead List View" icon-name="standard:lead_list">
+        <div class="slds-p-horizontal_medium">
+            <div class="slds-grid slds-wrap slds-grid_align-spread">
+                <div class="slds-col slds-size_1-of-3 slds-p-bottom_small">
+                    <lightning-input type="search" label="Search" onchange={handleSearchChange} value={searchTerm}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-3 slds-p-bottom_small">
+                    <lightning-combobox label="Filter By Status" placeholder="Select Status" options={statusOptions}
+                                        value={selectedStatus} onchange={handleStatusChange}>
+                    </lightning-combobox>
+                </div>
+            </div>
+        </div>
+        <lightning-datatable data={leads} columns={columns} key-field="Id" show-row-number-column
+                             onrowaction={handleRowAction} onsave={handleSave}>
+        </lightning-datatable>
+    </lightning-card>
+    <template if:true={showEditModal}>
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <h2 class="slds-modal__title">Edit Lead</h2>
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                        onclick={hideEditModal}>
+                    <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+                </button>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium">
+                <div class="slds-form">
+                    <lightning-input type="text" label="First Name" value={selectedLead.FirstName}
+                                     onchange={handleFirstNameChange}>
+                    </lightning-input>
+                    <lightning-input type="text" label="Last Name" value={selectedLead.LastName}
+                                     onchange={handleLastNameChange}>
+                    </lightning-input>
+                    <lightning-input type="email" label="Email" value={selectedLead.Email}
+                                     onchange={handleEmailChange}>
+                    </lightning-input>
+                    <lightning-input type="phone" label="Phone" value={selectedLead.Phone}
+                                     onchange={handlePhoneChange}>
+                    </lightning-input>
+                    <lightning-input type="text" label="Company" value={selectedLead.Company}
+                                     onchange={handleCompanyChange}>
+                    </lightning-input>
+                </div>
+            </div>
+            <div class="slds-modal__footer">
+                <lightning-button label="Save" onclick={handleEditSave} variant="brand">
+                </lightning-button>
+                <lightning-button label="Cancel" onclick={hideEditModal} variant="neutral">
+                </lightning-button>
+            </div>
+        </div>
+        <div class="slds-modal__backdrop slds-modal__backdrop_open"></div>
+    </template>
+</template>
